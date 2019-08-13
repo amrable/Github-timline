@@ -1,6 +1,25 @@
 <%- include("partials/header"); -%>
 
-<h1>Hi</h1>
+<div class="search">
 
+<div class="container">
+
+   <form class="" action="index.html" method="post">
+
+     <div class=" p-2 bg-light rounded rounded-pill shadow-sm mb-4">
+
+       <div class="input-group">
+         <input type="search"  id="input" placeholder="Enter your Github username." aria-describedby="button-addon1" autocomplete="off" class="form-control border-0 bg-light">
+         <div class="input-group-append">
+           <button id="button-addon1" type="button" class="btn btn-link text-primary"><i  style="  color: #d65a31;"class="fa fa-search"></i></button>
+         </div>
+       </div>
+     </div>
+     <h6><small>Only public repositeries will appear.</small></h6>
+
+   </form>
+
+   </div>
+ </div>
 
 <%- include("partials/footer"); -%>
