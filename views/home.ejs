@@ -2,24 +2,93 @@
 
 <div class="search">
 
-<div class="container">
+  <div class="container">
 
-   <form class="" action="index.html" method="post">
+    <form action="/" method="POST">
 
-     <div class=" p-2 bg-light rounded rounded-pill shadow-sm mb-4">
+      <div class=" p-2 bg-light rounded rounded-pill shadow-sm mb-4">
 
-       <div class="input-group">
-         <input type="search"  id="input" placeholder="Enter your Github username." aria-describedby="button-addon1" autocomplete="off" class="form-control border-0 bg-light">
-         <div class="input-group-append">
-           <button id="button-addon1" type="button" class="btn btn-link text-primary"><i  style="  color: #d65a31;"class="fa fa-search"></i></button>
-         </div>
-       </div>
-     </div>
-     <h6><small>Only public repositeries will appear.</small></h6>
+        <div class="input-group">
+          <input type="search" id="input" placeholder="Enter your Github username." name="username" aria-describedby="button-addon1" autocomplete="off" class="form-control border-0 bg-light">
+          <div class="input-group-append">
+            <!-- <button id="button-addon1" style="box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);" type="submit" class="btn btn-link text-primary"><i style="  color: #d65a31;" class="fa fa-search"></i></button> -->
+          </div>
+        </div>
+      </div>
 
-   </form>
+      <button type="submit" class="btn btn-outline-light" name="button">Generate</button>
+      <button type="button" onclick="location.href = '/reset';" class="btn btn-outline-info" name="button">Reset</button>
+      <h6><small>Only public repositeries will appear.</small></h6>
 
-   </div>
- </div>
+    </form>
+
+  </div>
+</div>
+
+
+
+
+
+<section class="cd-timeline js-cd-timeline">
+  <div class="card bg-light mb-3 mycard">
+    <div class="card-header myheader">Summary</div>
+
+
+    <div class="card-body">
+      <% if (account.profile == ""){ %>
+        <h5>Enter your github username to see your summary.</h5>
+
+
+      <% }else if(account.profile == "error"){ %>
+        <h5>Enter a valid github username.</h5>
+
+
+      <%}else{%>
+        <img src="<%= account.avatar %>" style="border-radius: 100px; width:20%; display: inline-block;" alt="">
+        <h5 class="card-title"> <%= account.data %></h5>
+
+        <h6>Repos <small><%= account.num_repo %></small></h6>
+        <h6>Watchers <small> <%= account.watchers %></small></h6>
+        <h6>Forks <small> <%= account.forks %></small></h6>
+
+        <a href="<%= account.profile %>" class="btn btn--subtle">Go to profile</a>
+
+
+      <% }%>
+    </div>
+  </div>
+
+  <div class="container max-width-lg cd-timeline__container">
+
+    <%  repos.forEach(function(repo){ %>
+
+
+
+
+    <div class="cd-timeline__block">
+      <div class="cd-timeline__img cd-timeline__img--picture">
+        <i class="devicon-<%= repo.language %>-plain colored " style="font-size: 2.5em;"></i>
+
+      </div> <!-- cd-timeline__img -->
+
+      <div class="cd-timeline__content text-component">
+        <h2> <%= repo.name %> </h2>
+        <h6>Size <small> <%= repo.size %></small></h6>
+        <h6>Last Update <small> <%= repo.updated_at %></small></h6>
+        <h6>Forks <small> <%= repo.forks_count %></small></h6>
+        <h6>Watchers <small> <%= repo.watchers_count %></small></h6>
+        <div class="flex justify-between items-center">
+          <span class="cd-timeline__date"> <%= repo.created_at %></span>
+          <a href="<%= repo.html_url %>" class="btn btn--subtle">Go to repo</a>
+        </div>
+      </div> <!-- cd-timeline__content -->
+    </div> <!-- cd-timeline__block -->
+
+
+    <% }) %>
+
+  </div>
+</section> <!-- cd-timeline -->
+<script src="js/main.js"></script>
 
 <%- include("partials/footer"); -%>

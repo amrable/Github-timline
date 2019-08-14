@@ -1,6 +1,9 @@
 {
   "name": "Github-timline",
   "version": "1.0.0",
+  "engines": {
+    "node": "8.11.1"
+  },
   "description": "",
   "main": "app.js",
   "scripts": {
@@ -19,6 +22,8 @@
   "homepage": "https://github.com/amrfahmyy/Github-timline#readme",
   "dependencies": {
     "ejs": "^2.6.2",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "lodash": "^4.17.15",
+    "request": "^2.88.0"
   }
 }
