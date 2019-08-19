@@ -25,38 +25,44 @@
   </div>
 </div>
 
+<section class="cd-timeline js-cd-timeline" style="background-image: linear-gradient( 69.8deg,  rgba(25,49,108,1) 2.8%, rgba(1,179,201,1) 97.8% );">
+
+  <div class="">
 
 
+    <div class="card bg-light mb-3 mycard">
+      <div class="card-header myheader">Summary</div>
 
 
-<section class="cd-timeline js-cd-timeline">
-  <div class="card bg-light mb-3 mycard">
-    <div class="card-header myheader">Summary</div>
-
-
-    <div class="card-body">
-      <% if (account.profile == ""){ %>
+      <div class="card-body">
+        <% if (account.condition == "RESET" ) { %>
         <h5>Enter your github username to see your summary.</h5>
 
 
-      <% }else if(account.profile == "error"){ %>
+        <% }else if(account.condition == "ERROR"){ %>
         <h5>Enter a valid github username.</h5>
 
 
-      <%}else{%>
+        <%}else{%>
         <img src="<%= account.avatar %>" style="border-radius: 100px; width:20%; display: inline-block;" alt="">
-        <h5 class="card-title"> <%= account.data %></h5>
+        <h5 class="card-title"> <%= account.name %></h5>
 
         <h6>Repos <small><%= account.num_repo %></small></h6>
-        <h6>Watchers <small> <%= account.watchers %></small></h6>
-        <h6>Forks <small> <%= account.forks %></small></h6>
+        <h6>followers <small> <%= account.followers %></small></h6>
+        <h6>followings <small> <%= account.followings %></small></h6>
 
         <a href="<%= account.profile %>" class="btn btn--subtle">Go to profile</a>
 
 
-      <% }%>
+        <% }%>
+      </div>
     </div>
+
+
   </div>
+
+
+
 
   <div class="container max-width-lg cd-timeline__container">
 
@@ -69,26 +75,73 @@
       <div class="cd-timeline__img cd-timeline__img--picture">
         <i class="devicon-<%= repo.language %>-plain colored " style="font-size: 2.5em;"></i>
 
-      </div> <!-- cd-timeline__img -->
+      </div>
 
       <div class="cd-timeline__content text-component">
         <h2> <%= repo.name %> </h2>
-        <h6>Size <small> <%= repo.size %></small></h6>
+        <h6>Size <small> <%= repo.size %> KB</small></h6>
         <h6>Last Update <small> <%= repo.updated_at %></small></h6>
         <h6>Forks <small> <%= repo.forks_count %></small></h6>
         <h6>Watchers <small> <%= repo.watchers_count %></small></h6>
         <div class="flex justify-between items-center">
-          <span class="cd-timeline__date"> <%= repo.created_at %></span>
+          <span class="cd-timeline__date" style="color: white;"> <%= repo.created_at %></span>
           <a href="<%= repo.html_url %>" class="btn btn--subtle">Go to repo</a>
         </div>
-      </div> <!-- cd-timeline__content -->
-    </div> <!-- cd-timeline__block -->
+      </div>
+    </div>
 
 
     <% }) %>
 
   </div>
+
+  <nav aria-label="Page navigation example" style="padding-top: 10px;">
+    <ul class="pagination justify-content-center">
+      <% if( pagi.current <= 1 ){%>
+      <li class="page-item disabled">
+        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+      </li>
+
+      <% }else{  %>
+      <li class="page-item">
+        <a class="page-link" href="/results/<%= pagi.current-1%>">Previous</a>
+      </li>
+      <% } %>
+
+      <% for(var i=pagi.current-2 ; i<=pagi.current+2 ; i++ ){ %>
+
+      <% if( i > 0 && i <= pagi.total){ %>
+
+      <%if ( i == pagi.current){%>
+
+      <li class="page-item active">
+        <a class="page-link" href="/results/<%=i%>"> <%=i%> <span class="sr-only">(current)</span></a>
+      </li>
+      <%}else{%>
+      <li class="page-item"><a class="page-link" href="/results/<%=i%>"> <%=i%> </a></li>
+
+      <%}}%>
+
+
+
+      <% } %>
+
+      <% if( pagi.current >= pagi.total ){%>
+      <li class="page-item disabled">
+        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Next</a>
+      </li>
+
+      <% }else{  %>
+      <li class="page-item">
+        <a class="page-link" href="/results/<%= parseInt(pagi.current) +1 %> ">Next</a>
+      </li>
+      <% } %>
+    </ul>
+  </nav>
+
+
 </section> <!-- cd-timeline -->
-<script src="js/main.js"></script>
+
+
 
 <%- include("partials/footer"); -%>
