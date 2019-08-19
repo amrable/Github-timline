@@ -59,6 +59,11 @@ app.get("/", function(req, res) {
     followings: 0,
     num_repo: 0
   };
+  global.pagination = {
+    current: 0,
+    total: 0,
+    size: 10
+  };
   res.render("home", {
 
     repos: obj,
